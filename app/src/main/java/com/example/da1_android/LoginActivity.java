@@ -1,5 +1,6 @@
 package com.example.da1_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     AuthService authService;
 
     private EditText emailEditText, passwordEditText;
-    private Button loginButton;
+    private Button loginButton,registerButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
+        registerButton = findViewById(R.id.registerButton);  // Esta línea falta
+
 
         loginButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString();
@@ -58,5 +62,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         });
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+
+
     }
+
 }
