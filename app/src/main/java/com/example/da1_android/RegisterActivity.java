@@ -51,8 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(RegisterActivity.this, "Registro exitoso", Toast.LENGTH_LONG).show();
-                        finish(); // Cerrar la actividad y volver al login
+                        Toast.makeText(RegisterActivity.this, "Registro exitoso. Verificá tu correo 📩", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RegisterActivity.this, TokenVerificationActivity.class);
+                        intent.putExtra("email", email); // pasamos el email para que se complete automáticamente
+                        startActivity(intent);
+                        finish();
+
                     } else {
                         Toast.makeText(RegisterActivity.this, "Error en el registro", Toast.LENGTH_SHORT).show();
                     }
