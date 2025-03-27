@@ -15,7 +15,9 @@
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/dark_red"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="32dp"
+        />
+
 
     <EditText
         android:id="@+id/emailEditText"
@@ -55,5 +57,20 @@
         android:layout_below="@id/loginButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/forgotPasswordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Olvidaste tu contraseña?"
+        android:textColor="@color/dark_red"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
 
 </LinearLayout>

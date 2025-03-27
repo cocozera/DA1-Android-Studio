@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText, passwordEditText;
     private Button loginButton,registerButton;
+    private TextView forgotPasswordText;
+
 
 
     @Override
@@ -36,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
-        registerButton = findViewById(R.id.registerButton);  // Esta línea falta
-
+        registerButton = findViewById(R.id.registerButton); // Esta línea falta
+        forgotPasswordText = findViewById(R.id.forgotPasswordText);
 
         loginButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString();
@@ -66,6 +69,11 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
+        forgotPasswordText.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RecoverPasswordActivity.class);
+            startActivity(intent);
+        });
+
 
 
     }
