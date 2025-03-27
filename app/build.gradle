@@ -46,4 +46,6 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
     annotationProcessor 'com.google.dagger:hilt-compiler:2.48'
+
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
 }

@@ -1,9 +1,10 @@
-package com.example.da1_android;
+package com.example.da1_android.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.da1_android.LoginActivity;
+
+import com.example.da1_android.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     @Override

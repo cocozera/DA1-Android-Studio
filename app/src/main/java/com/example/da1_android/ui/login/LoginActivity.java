@@ -1,4 +1,4 @@
-package com.example.da1_android;
+package com.example.da1_android.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.da1_android.R;
 import com.example.da1_android.data.api.AuthService;
 import com.example.da1_android.data.model.AuthResponse;
 import com.example.da1_android.data.model.LoginRequest;
+import com.example.da1_android.ui.password.RecoverPasswordActivity;
+import com.example.da1_android.ui.register.RegisterActivity;
 
 import javax.inject.Inject;
 

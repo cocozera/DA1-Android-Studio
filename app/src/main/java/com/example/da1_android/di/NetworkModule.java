@@ -1,4 +1,4 @@
-package com.example.da1_android.data.di;
+package com.example.da1_android.di;
 
 import javax.inject.Singleton;
 
