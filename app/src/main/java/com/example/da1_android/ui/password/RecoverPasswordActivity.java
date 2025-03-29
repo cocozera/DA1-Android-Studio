@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ import com.example.da1_android.R;
 import com.example.da1_android.data.api.AuthService;
 import com.example.da1_android.data.model.AuthResponse;
 import com.example.da1_android.ui.login.ChangePasswordActivity;
+import com.example.da1_android.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 
@@ -59,5 +61,15 @@ public class RecoverPasswordActivity extends AppCompatActivity {
                 }
             });
         });
+
+        // Asociar el texto clickeable al método goToLogin
+        TextView loginText = findViewById(R.id.loginText);
+        loginText.setOnClickListener(v -> goToLogin());
+    }
+
+    // Método para navegar a la actividad de inicio de sesión
+    public void goToLogin() {
+        Intent intent = new Intent(RecoverPasswordActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 }
