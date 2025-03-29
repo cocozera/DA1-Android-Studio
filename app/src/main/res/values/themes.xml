@@ -6,5 +6,24 @@
     </style>
 
     <style name="Theme.DA1Android" parent="Base.Theme.DA1Android" />
+    <!-- res/values/themes.xml (o styles.xml) -->
+    <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Color de fondo principal de la app (opcional) -->
+        <item name="android:colorBackground">@color/champagne_pink</item>
+
+        <!-- Color primario (si quieres #806350) -->
+        <item name="colorPrimary">@color/marron</item>
+        <item name="colorPrimaryVariant">@color/marron</item>
+
+        <!-- Color de la barra de estado -->
+        <item name="android:statusBarColor">@color/marron</item>
+
+        <!-- Si quieres texto claro sobre la barra de estado oscura, pon false -->
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Quita la ActionBar por defecto (importante si no quieres el color primario en la parte superior) -->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
 </resources>
