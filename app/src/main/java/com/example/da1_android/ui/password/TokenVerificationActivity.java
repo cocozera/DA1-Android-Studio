@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.da1_android.R;
 import com.example.da1_android.data.api.AuthService;
 import com.example.da1_android.data.model.AuthResponse;
+import com.example.da1_android.data.model.VerifyTokenRequest;
 import com.example.da1_android.ui.login.LoginActivity;
 
 import javax.inject.Inject;
@@ -47,7 +48,9 @@ public class TokenVerificationActivity extends AppCompatActivity {
             String inputEmail = emailEditText.getText().toString();
             String inputCode = tokenEditText.getText().toString();
 
-            authService.verifyToken(inputEmail, inputCode).enqueue(new Callback<AuthResponse>() {
+            VerifyTokenRequest request = new VerifyTokenRequest(inputEmail, inputCode);
+
+            authService.verifyToken(request).enqueue(new Callback<AuthResponse>() {
                 @Override
                 public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                     if (response.isSuccessful()) {
@@ -65,5 +68,6 @@ public class TokenVerificationActivity extends AppCompatActivity {
                 }
             });
         });
+
     }
 }

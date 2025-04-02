@@ -43,10 +43,16 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(v -> {
-            String name = nameEditText.getText().toString();
-            String email = emailEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
-            String phone = phoneEditText.getText().toString();
+            String name = nameEditText.getText().toString().trim();
+            String email = emailEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
+            String phone = phoneEditText.getText().toString().trim();
+
+            // Validación de campos vacíos
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty()) {
+                Toast.makeText(RegisterActivity.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             RegisterRequest request = new RegisterRequest(name, email, password, phone);
 
@@ -56,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         Toast.makeText(RegisterActivity.this, "Registro exitoso. Verificá tu correo 📩", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this, TokenVerificationActivity.class);
-                        intent.putExtra("email", email); // pasamos el email para que se complete automáticamente
+                        intent.putExtra("email", email);
                         startActivity(intent);
                         finish();
 
@@ -71,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
         });
+
     }
     public void goToLogin(View view) {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

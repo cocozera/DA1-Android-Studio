@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.da1_android.R;
 import com.example.da1_android.data.api.AuthService;
 import com.example.da1_android.data.model.AuthResponse;
+import com.example.da1_android.data.model.ChangePasswordRequest;
 
 import javax.inject.Inject;
 
@@ -46,23 +47,25 @@ public class ChangePasswordActivity extends AppCompatActivity {
             String code = codeEditText.getText().toString();
             String newPassword = newPasswordEditText.getText().toString();
 
-            authService.changePasswordWithCode(enteredEmail, code, newPassword)
-                    .enqueue(new Callback<AuthResponse>() {
-                        @Override
-                        public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(ChangePasswordActivity.this, "Contraseña actualizada ✅", Toast.LENGTH_LONG).show();
-                                finish(); // Podés redirigir al login si querés
-                            } else {
-                                Toast.makeText(ChangePasswordActivity.this, "Código inválido o expirado ❌", Toast.LENGTH_SHORT).show();
-                            }
-                        }
+            ChangePasswordRequest request = new ChangePasswordRequest(enteredEmail, code, newPassword);
 
-                        @Override
-                        public void onFailure(Call<AuthResponse> call, Throwable t) {
-                            Toast.makeText(ChangePasswordActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            authService.changePasswordWithCode(request).enqueue(new Callback<AuthResponse>() {
+                @Override
+                public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(ChangePasswordActivity.this, "Contraseña actualizada ✅", Toast.LENGTH_LONG).show();
+                        finish(); // Podés redirigir al login si querés
+                    } else {
+                        Toast.makeText(ChangePasswordActivity.this, "Código inválido o expirado ❌", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AuthResponse> call, Throwable t) {
+                    Toast.makeText(ChangePasswordActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
+
     }
 }

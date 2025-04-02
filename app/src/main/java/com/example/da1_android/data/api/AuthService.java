@@ -1,8 +1,11 @@
 package com.example.da1_android.data.api;
 
+import com.example.da1_android.data.model.ChangePasswordRequest;
 import com.example.da1_android.data.model.LoginRequest;
 import com.example.da1_android.data.model.AuthResponse;
+import com.example.da1_android.data.model.RecoverPasswordRequest;
 import com.example.da1_android.data.model.RegisterRequest;
+import com.example.da1_android.data.model.VerifyTokenRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,21 +21,11 @@ public interface AuthService {
     Call<AuthResponse> register(@Body RegisterRequest request);
 
     @POST("/api/auth/verify")
-    Call<AuthResponse> verifyToken(
-            @Query("email") String email,
-            @Query("code") String code
-    );
+    Call<AuthResponse> verifyToken(@Body VerifyTokenRequest request);
 
     @POST("/api/auth/recover-password")
-    Call<AuthResponse> recoverPassword(
-            @Query("email") String email
-    );
+    Call<AuthResponse> recoverPassword(@Body RecoverPasswordRequest request);
 
     @POST("/api/auth/change-password")
-    Call<AuthResponse> changePasswordWithCode(
-            @Query("email") String email,
-            @Query("code") String code,
-            @Query("newPassword") String newPassword
-    );
-
+    Call<AuthResponse> changePasswordWithCode(@Body ChangePasswordRequest request);
 }

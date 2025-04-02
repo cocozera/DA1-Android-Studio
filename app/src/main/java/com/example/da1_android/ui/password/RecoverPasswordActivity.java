@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.da1_android.R;
 import com.example.da1_android.data.api.AuthService;
 import com.example.da1_android.data.model.AuthResponse;
+import com.example.da1_android.data.model.RecoverPasswordRequest;
 import com.example.da1_android.ui.login.ChangePasswordActivity;
 import com.example.da1_android.ui.login.LoginActivity;
 
@@ -41,7 +42,9 @@ public class RecoverPasswordActivity extends AppCompatActivity {
         sendCodeButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString();
 
-            authService.recoverPassword(email).enqueue(new Callback<AuthResponse>() {
+            RecoverPasswordRequest request = new RecoverPasswordRequest(email);
+
+            authService.recoverPassword(request).enqueue(new Callback<AuthResponse>() {
                 @Override
                 public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                     if (response.isSuccessful()) {
@@ -61,6 +64,7 @@ public class RecoverPasswordActivity extends AppCompatActivity {
                 }
             });
         });
+
 
         // Asociar el texto clickeable al método goToLogin
         TextView loginText = findViewById(R.id.loginText);
