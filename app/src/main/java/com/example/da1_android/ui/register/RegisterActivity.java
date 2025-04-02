@@ -54,6 +54,11 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
 
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(RegisterActivity.this, "Ingrese un correo electrónico válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             RegisterRequest request = new RegisterRequest(name, email, password, phone);
 
             authService.register(request).enqueue(new Callback<AuthResponse>() {
