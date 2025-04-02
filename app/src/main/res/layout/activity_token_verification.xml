@@ -1,49 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/verifyLayout"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/champagne_pink">
+    android:background="@color/champagne_pink"
+    tools:context=".ui.password.TokenVerificationActivity">
 
+    <!-- Título -->
     <TextView
+        android:id="@+id/verifyTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Verificar Cuenta"
-        android:textSize="24sp"
         android:textColor="@color/dark_red"
-        android:layout_marginBottom="24dp"/>
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="110dp" />
 
-    <EditText
-        android:id="@+id/emailEditText"
-        android:layout_width="match_parent"
+    <!-- Card con formulario -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardVerify"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Correo electrónico"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_bg"
-        android:textColor="@color/coffee"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:backgroundTint="@android:color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toBottomOf="@id/verifyTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/backToLoginText"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="5dp">
 
-    <EditText
-        android:id="@+id/tokenEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Código de verificación"
-        android:inputType="number"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_bg"
-        android:textColor="@color/coffee"
-        android:layout_marginBottom="24dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <Button
-        android:id="@+id/verifyButton"
-        android:layout_width="match_parent"
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Correo electrónico"
+                app:startIconDrawable="@drawable/ic_email">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/coffee"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Código de verificación -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Código de verificación"
+                app:startIconDrawable="@drawable/ic_check">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tokenEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/coffee"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botón Verificar -->
+            <Button
+                android:id="@+id/verifyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="@color/engineering_orange"
+                android:fontFamily="@font/montserrat_bold"
+                android:padding="12dp"
+                android:text="Verificar"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Texto para volver a iniciar sesión -->
+    <TextView
+        android:id="@+id/backToLoginText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verificar"
-        android:backgroundTint="@color/engineering_orange"
-        android:textColor="@android:color/white"
-        android:padding="12dp"/>
-</LinearLayout>
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="¿Ya tienes cuenta? Inicia sesión"
+        android:onClick="goToLogin"
+        android:textColor="@color/dark_red"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

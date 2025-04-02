@@ -2,6 +2,7 @@ package com.example.da1_android.ui.password;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -70,4 +71,9 @@ public class TokenVerificationActivity extends AppCompatActivity {
         });
 
     }
+    public void goToLogin(View view) {
+        Intent intent = new Intent(TokenVerificationActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 }
