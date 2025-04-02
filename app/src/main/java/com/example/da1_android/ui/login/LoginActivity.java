@@ -15,6 +15,7 @@ import com.example.da1_android.data.api.AuthService;
 import com.example.da1_android.data.model.AuthResponse;
 import com.example.da1_android.data.model.LoginRequest;
 import com.example.da1_android.data.prefs.UserPrefsManager;
+import com.example.da1_android.ui.home.HomeActivity;
 import com.example.da1_android.ui.password.RecoverPasswordActivity;
 import com.example.da1_android.ui.register.RegisterActivity;
 
@@ -60,8 +61,13 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         AuthResponse authResponse = response.body();
                         userPrefsManager.saveAuthResponse(authResponse);
-                        Toast.makeText(LoginActivity.this, "Login exitoso. Token guardado.", Toast.LENGTH_LONG).show();
-                        // Intent a MainActivity u otra vista
+
+                        Toast.makeText(LoginActivity.this, "Login exitoso", Toast.LENGTH_LONG).show();
+
+                        // Redirigir a HomeActivity
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish(); // Cierra la actividad de login para que no pueda volver atrás con el botón de retroceso
                     } else {
                         Toast.makeText(LoginActivity.this, "Error de login", Toast.LENGTH_SHORT).show();
                     }
