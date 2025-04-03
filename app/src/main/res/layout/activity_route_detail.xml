@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewRouteId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID de la Ruta"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewRouteAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dirección"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewRouteStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estado"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewRouteStartedAt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inicio"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewRouteFinishedAt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fin"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewAssignedUserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID del Usuario Asignado"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewPackageDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalles del Paquete"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewPackageName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Paquete"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewPackageDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción del Paquete"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

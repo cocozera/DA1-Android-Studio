@@ -13,9 +13,9 @@ import retrofit2.http.Path;
 public interface RouteService {
 
     // Método para obtener una ruta con todos sus detalles
-    @GET("/routes/{routeId}")
-    Call<RouteDetailDTO> getRouteDetails(@Path("routeId") Long routeId);
+    @GET("/api/routes/{routeId}")
+    Call<RouteDetailDTO> getRouteDetails(@Path("routeId") Long routeId, @Header("Authorization") String token);
 
-    @GET("routes/")
+    @GET("/api/routes/")
     Call<List<RouteDTO>> getAllRoutes(@Header("Authorization") String token);
 }

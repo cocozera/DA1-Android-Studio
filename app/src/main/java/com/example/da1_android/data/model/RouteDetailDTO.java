@@ -1,6 +1,8 @@
 package com.example.da1_android.data.model;
 
-public class RouteDetailDTO {
+import java.io.Serializable;
+
+public class RouteDetailDTO implements Serializable {
     private Long id;
     private String address;
     private String status;

@@ -1,6 +1,8 @@
 package com.example.da1_android.data.model;
 
-public class PackageDTO {
+import java.io.Serializable;
+
+public class PackageDTO implements Serializable {
     private Long id;
     private String receptor;
     private String depositSector;
