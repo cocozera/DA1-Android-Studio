@@ -1,91 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     android:background="@color/champagne_pink">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back_arrow_red"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Volver"
+                android:layout_gravity="start"
+                android:layout_marginBottom="18dp" />
+
+            <!-- Sección Datos de Ruta -->
+            <TextView
+                android:id="@+id/textViewRouteId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID de la Ruta"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/dark_red"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewRouteZone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zona"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/coffee"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/textViewRouteStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/coffee"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Separador visual -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/coffee"
+                android:layout_marginVertical="12dp" />
+
+            <!-- Sección Detalles del Paquete -->
+            <TextView
+                android:id="@+id/textViewPackageDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detalles del Paquete"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/dark_red"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textViewPackageDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ubicación del paquete en el depósito"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/coffee"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- FAB con ícono QR -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/scanQrButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
-        <ImageButton
-            android:id="@+id/buttonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_back_arrow_red"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Volver"
-            android:layout_gravity="start"
-            android:layout_marginBottom="18dp" />
-        <!-- Sección Datos de Ruta -->
-        <TextView
-            android:id="@+id/textViewRouteId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ID de la Ruta"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/dark_red"
-            android:layout_marginBottom="8dp" />
-
-
-        <TextView
-            android:id="@+id/textViewRouteZone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zona"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_regular"
-            android:textColor="@color/coffee"
-            android:layout_marginBottom="4dp" />
-
-        <TextView
-            android:id="@+id/textViewRouteStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Estado"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_regular"
-            android:textColor="@color/coffee"
-            android:layout_marginBottom="4dp" />
-
-
-
-        <!-- Separador visual -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/coffee"
-            android:layout_marginVertical="12dp" />
-
-        <!-- Sección Detalles del Paquete -->
-        <TextView
-            android:id="@+id/textViewPackageDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Detalles del Paquete"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/dark_red"
-            android:layout_marginBottom="8dp" />
-
-
-        <TextView
-            android:id="@+id/textViewPackageDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ubicación del paquete en el deposito"
-            android:textSize="18sp"
-            android:fontFamily="@font/montserrat_regular"
-            android:textColor="@color/coffee"
-            android:layout_marginBottom="8dp" />
-
-
-
-
-    </LinearLayout>
-</ScrollView>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:contentDescription="Escanear QR"
+        android:src="@drawable/ic_qr_scan"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/engineering_orange"
+        app:elevation="6dp"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

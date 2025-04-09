@@ -1,7 +1,6 @@
-package com.example.da1_android.ui.home;
+package com.example.da1_android.ui.routes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
