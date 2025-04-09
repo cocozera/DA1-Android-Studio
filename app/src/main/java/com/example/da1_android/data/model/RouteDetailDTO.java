@@ -8,6 +8,7 @@ public class RouteDetailDTO implements Serializable {
     private String status;
     private String startedAt;
     private String finishedAt;
+    private String zone;
     private Long assignedUserId;
     private PackageDTO packageDTO;  // Solo un único paquete asociado a la ruta
 
@@ -52,6 +53,12 @@ public class RouteDetailDTO implements Serializable {
     public void setFinishedAt(String finishedAt) {
         this.finishedAt = finishedAt;
     }
+
+
+    public String getZone() {return zone;}
+
+    public void setZone(String zone) {this.zone = zone;}
+
 
     public Long getAssignedUserId() {
         return assignedUserId;

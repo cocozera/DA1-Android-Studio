@@ -2,77 +2,90 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="20dp"
+    android:background="@color/champagne_pink">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:padding="16dp">
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_arrow_red"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Volver"
+            android:layout_gravity="start"
+            android:layout_marginBottom="18dp" />
+        <!-- Sección Datos de Ruta -->
         <TextView
             android:id="@+id/textViewRouteId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ID de la Ruta"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/dark_red"
+            android:layout_marginBottom="8dp" />
+
 
         <TextView
-            android:id="@+id/textViewRouteAddress"
-            android:layout_width="match_parent"
+            android:id="@+id/textViewRouteZone"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dirección"
-            android:textSize="16sp" />
+            android:text="Zona"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/coffee"
+            android:layout_marginBottom="4dp" />
 
         <TextView
             android:id="@+id/textViewRouteStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Estado"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/coffee"
+            android:layout_marginBottom="4dp" />
 
-        <TextView
-            android:id="@+id/textViewRouteStartedAt"
+
+
+        <!-- Separador visual -->
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Inicio"
-            android:textSize="16sp" />
+            android:layout_height="1dp"
+            android:background="@color/coffee"
+            android:layout_marginVertical="12dp" />
 
-        <TextView
-            android:id="@+id/textViewRouteFinishedAt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fin"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textViewAssignedUserId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ID del Usuario Asignado"
-            android:textSize="16sp" />
-
+        <!-- Sección Detalles del Paquete -->
         <TextView
             android:id="@+id/textViewPackageDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Detalles del Paquete"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/dark_red"
+            android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/textViewPackageName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre del Paquete"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textViewPackageDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción del Paquete"
-            android:textSize="16sp" />
+            android:text="Ubicación del paquete en el deposito"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/coffee"
+            android:layout_marginBottom="8dp" />
+
+
+
 
     </LinearLayout>
 </ScrollView>
