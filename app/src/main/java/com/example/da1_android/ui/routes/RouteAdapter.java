@@ -23,13 +23,15 @@ public class RouteAdapter extends ArrayAdapter<RouteDTO> {
 
         RouteDTO route = getItem(position);
 
-        TextView txtAddress = convertView.findViewById(R.id.routeAddress);
+        TextView txtZone = convertView.findViewById(R.id.routeZone);
         TextView txtStatus = convertView.findViewById(R.id.routeStatus);
-        TextView txtStartedAt = convertView.findViewById(R.id.routeStartedAt);
 
-        txtAddress.setText(route.getAddress());
-        txtStatus.setText(route.getStatus());
-        txtStartedAt.setText(route.getStartedAt());
+
+        if (route != null) {
+            txtZone.setText(route.getZone() != null ? route.getZone() : "Sin zona");
+            txtStatus.setText(route.getStatus() != null ? route.getStatus() : "Sin estado");
+        }
+
 
 
         return convertView;

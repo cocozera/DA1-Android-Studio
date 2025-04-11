@@ -6,8 +6,8 @@ public class RouteDTO {
     @SerializedName("id")
     private Long id;
 
-    @SerializedName("address")  // Asegúrate de que este campo coincide con la API
-    private String address;
+    @SerializedName("zone")
+    private String zone;
 
     @SerializedName("status")
     private String status;
@@ -16,7 +16,7 @@ public class RouteDTO {
     private String startedAt;
 
     public Long getId() { return id; }
-    public String getAddress() { return address; }
+    public String getZone() { return zone; }
     public String getStatus() { return status; }
     public String getStartedAt() { return startedAt; }
 }
