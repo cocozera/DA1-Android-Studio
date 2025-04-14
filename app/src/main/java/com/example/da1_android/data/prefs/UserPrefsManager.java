@@ -36,4 +36,12 @@ public class UserPrefsManager {
         long userId = encryptedSharedPreferences.getLong(KEY_USER_ID, -1L);
         return userId != -1L ? userId : null;
     }
+
+    // Método para limpiar la sesión: borra token y userId
+    public void clearAuth() {
+        encryptedSharedPreferences.edit()
+                .remove(KEY_TOKEN)
+                .remove(KEY_USER_ID)
+                .apply();
+    }
 }

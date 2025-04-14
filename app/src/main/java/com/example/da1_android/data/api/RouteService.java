@@ -25,7 +25,6 @@ public interface RouteService {
     @GET("/api/routes/{routeId}")
     Call<RouteDetailDTO> getRouteDetails(@Path("routeId") Long routeId, @Header("Authorization") String token);
 
-    // Asignar un usuario a una ruta (endpoint POST /assign)
     @POST("/api/routes/assign")
     Call<String> assignUserToRoute(@Query("routeId") Long routeId,
                                    @Query("userId") Long userId,

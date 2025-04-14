@@ -12,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.example.da1_android.data.api.AuthService;
 import com.example.da1_android.data.api.RouteService;
+import com.example.da1_android.data.api.UserService;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -39,6 +40,12 @@ public class NetworkModule {
     @Singleton
     public RouteService provideRouteService(Retrofit retrofit) {
         return retrofit.create(RouteService.class);
+    }
+
+    @Provides
+    @Singleton
+    public UserService provideUserService(Retrofit retrofit) {
+        return retrofit.create(UserService.class);
     }
 
 }
