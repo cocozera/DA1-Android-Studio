@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.example.da1_android.R;
 import com.example.da1_android.data.model.CompletedRouteDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +53,7 @@ public class CompletedRoutesAdapter extends BaseAdapter {
             holder.textFinishedAt = convertView.findViewById(R.id.textFinishedAt);
             holder.textZone = convertView.findViewById(R.id.textZone);
             holder.textStatus = convertView.findViewById(R.id.textStatus);
+            holder.textClient = convertView.findViewById(R.id.textClient); // Nuevo TextView para el cliente
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -62,6 +65,14 @@ public class CompletedRoutesAdapter extends BaseAdapter {
         holder.textFinishedAt.setText("Fin: " + route.getFinishedAt());
         holder.textZone.setText("Zona: " + route.getZone());
         holder.textStatus.setText("Estado: " + route.getStatus());
+
+        // Mostramos el receptor del paquete (cliente)
+        if (route.getPackageDTO() != null && route.getPackageDTO().getReceptor() != null) {
+            holder.textClient.setText("Cliente: " + route.getPackageDTO().getReceptor());
+        } else {
+            holder.textClient.setText("Cliente: No disponible");
+        }
+
         return convertView;
     }
 
@@ -71,5 +82,6 @@ public class CompletedRoutesAdapter extends BaseAdapter {
         TextView textFinishedAt;
         TextView textZone;
         TextView textStatus;
+        TextView textClient; // Nuevo campo agregado
     }
 }

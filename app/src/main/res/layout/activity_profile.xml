@@ -79,7 +79,7 @@
                 android:text="Nombre: "
                 android:textSize="16sp"
                 android:textColor="@color/coffee"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="16dp" />
 
             <!-- Muestra de datos: Email -->
             <TextView
