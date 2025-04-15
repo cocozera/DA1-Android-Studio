@@ -32,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView textName;
     private TextView textEmail;
+    private TextView textPhoneNumber;
     private Button buttonLogout;
     private ImageButton buttonBack;
 
@@ -44,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         // Vinculamos las vistas del layout
         textName = findViewById(R.id.textName);
         textEmail = findViewById(R.id.textEmail);
+        textPhoneNumber = findViewById(R.id.textPhoneNumber); // Nuevo TextView
         buttonLogout = findViewById(R.id.buttonLogout);
         buttonBack = findViewById(R.id.buttonBack);
 
@@ -62,10 +64,11 @@ public class ProfileActivity extends AppCompatActivity {
                         // Actualizamos la UI con los datos del usuario obtenido
                         textName.setText("Nombre: " + user.getName());
                         textEmail.setText("Email: " + user.getEmail());
+                        textPhoneNumber.setText("Teléfono: " + user.getPhoneNumber()); // Mostrar número de teléfono
                     } else {
-                        Log.e(TAG, "onResponse: Error al obtener los datos. Código: " + response.code());
                         textName.setText("Error al obtener los datos");
                         textEmail.setText("");
+                        textPhoneNumber.setText("");
                     }
                 }
 
@@ -74,12 +77,14 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.e(TAG, "onFailure: Error de conexión al obtener los datos del usuario", t);
                     textName.setText("Error en la conexión");
                     textEmail.setText("");
+                    textPhoneNumber.setText("");
                 }
             });
         } else {
             Log.e(TAG, "onCreate: No se encontró userId en SharedPreferences");
             textName.setText("Usuario no identificado");
             textEmail.setText("");
+            textPhoneNumber.setText("");
         }
 
         // Configuración del botón para cerrar sesión

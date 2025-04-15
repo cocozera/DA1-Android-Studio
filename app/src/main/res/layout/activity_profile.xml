@@ -91,6 +91,16 @@
                 android:textColor="@color/coffee"
                 android:layout_marginBottom="16dp" />
 
+            <!-- Muestra de datos: Teléfono -->
+            <TextView
+                android:id="@+id/textPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono: "
+                android:textSize="16sp"
+                android:textColor="@color/coffee"
+                android:layout_marginBottom="16dp" />
+
             <!-- Botón de Cerrar Sesión -->
             <Button
                 android:id="@+id/buttonLogout"
