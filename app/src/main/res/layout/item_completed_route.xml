@@ -1,63 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    android:backgroundTint="@color/white"
+    app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/textAddress"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dirección"
-        android:textColor="@color/coffee"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textStartedAt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inicio:"
-        android:textColor="@color/coffee"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/textAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dirección"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_red" />
 
-    <TextView
-        android:id="@+id/textFinishedAt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fin:"
-        android:textColor="@color/coffee"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/textZone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zona: Palermo"
+            android:textSize="14sp"
+            android:textColor="@color/coffee"
+            android:layout_marginTop="6dp" />
 
-    <TextView
-        android:id="@+id/textZone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Zona:"
-        android:textColor="@color/coffee"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/textStartedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicio: 10:00"
+            android:textSize="14sp"
+            android:textColor="@color/coffee"
+            android:layout_marginTop="2dp" />
 
-    <TextView
-        android:id="@+id/textStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Estado:"
-        android:textColor="@color/coffee"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"/>
-    <TextView
-        android:id="@+id/textClient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cliente:"
-        android:textColor="@color/coffee"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"/>
+        <TextView
+            android:id="@+id/textFinishedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fin: 12:00"
+            android:textSize="14sp"
+            android:textColor="@color/coffee"
+            android:layout_marginTop="2dp" />
 
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: PENDING"
+            android:textSize="14sp"
+            android:textColor="@color/engineering_orange"
+            android:layout_marginTop="6dp"
+            android:textStyle="bold"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cliente: Nombre"
+            android:textSize="13sp"
+            android:textColor="@color/khaki"
+            android:layout_marginTop="6dp" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

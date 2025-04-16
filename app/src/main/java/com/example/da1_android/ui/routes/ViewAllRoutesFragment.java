@@ -6,19 +6,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.example.da1_android.R;
 import com.example.da1_android.data.api.RouteService;
 import com.example.da1_android.data.model.RouteDTO;
 import com.example.da1_android.data.model.RouteDetailDTO;
 import com.example.da1_android.data.prefs.UserPrefsManager;
+
 import java.util.List;
+
 import javax.inject.Inject;
+
 import dagger.hilt.android.AndroidEntryPoint;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +45,6 @@ public class ViewAllRoutesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // Infla el layout del fragment. Se recomienda renombrar el archivo a fragment_view_all_routes.xml
         return inflater.inflate(R.layout.fragment_view_all_routes, container, false);
     }
 
@@ -49,7 +54,25 @@ public class ViewAllRoutesFragment extends Fragment {
 
         listViewRoutes = view.findViewById(R.id.listViewRoutes);
         ImageButton buttonBack = view.findViewById(R.id.buttonBack);
-        buttonBack.setOnClickListener(v -> requireActivity().onBackPressed());
+
+        // ✅ Agregamos animación como en historial
+        buttonBack.setOnClickListener(v -> {
+            ScaleAnimation scaleDown = new ScaleAnimation(
+                    1f, 0.85f, 1f, 0.85f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f,
+                    ScaleAnimation.RELATIVE_TO_SELF, 0.5f
+            );
+            scaleDown.setDuration(100);
+            scaleDown.setFillAfter(true);
+
+            v.startAnimation(scaleDown);
+
+            v.postDelayed(() -> {
+                v.clearAnimation();
+                requireActivity().onBackPressed();
+            }, 150);
+        });
+
         fetchRoutes();
     }
 
@@ -65,7 +88,6 @@ public class ViewAllRoutesFragment extends Fragment {
             public void onResponse(Call<List<RouteDTO>> call, Response<List<RouteDTO>> response) {
                 if (response.isSuccessful()) {
                     List<RouteDTO> routeList = response.body();
-                    // Suponiendo que RouteAdapter acepta un Context en su constructor
                     RouteAdapter routeAdapter = new RouteAdapter(requireContext(), routeList);
                     listViewRoutes.setAdapter(routeAdapter);
                     listViewRoutes.setOnItemClickListener((parent, view, position, id) -> {
