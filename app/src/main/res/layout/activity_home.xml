@@ -7,7 +7,7 @@
     android:background="@color/champagne_pink"
     android:padding="16dp">
 
-    <!-- Fila superior: logo + perfil alineados -->
+    <!-- Fila superior -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
@@ -20,7 +20,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp">
 
-        <!-- Logo DeRemate -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,7 +32,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_deremate"
-                android:fillColor="@color/dark_red" />
+                app:tint="@color/dark_red" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,7 +45,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Ícono Perfil a la derecha -->
         <ImageButton
             android:id="@+id/profileButton"
             android:layout_width="56dp"
@@ -55,10 +53,10 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_profile"
             android:contentDescription="Perfil"
-            android:fillColor="@color/dark_red" />
+            app:tint="@color/dark_red" />
     </LinearLayout>
 
-    <!-- Título principal -->
+    <!-- Título -->
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
@@ -99,7 +97,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_route"
-                android:fillColor="@color/engineering_orange" />
+                app:tint="@color/engineering_orange" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -138,7 +136,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_history"
-                android:fillColor="@color/engineering_orange" />
+                app:tint="@color/engineering_orange" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,7 +149,7 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Contenedor para cargar el Fragment (inicialmente oculto) -->
+    <!-- Contenedor para fragmentos -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
@@ -162,5 +160,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
+
+    <!-- FAB: Rutas en progreso -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnInProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_inprogress_hourglass"
+        android:contentDescription="Rutas en progreso"
+        app:backgroundTint="@color/engineering_orange"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
