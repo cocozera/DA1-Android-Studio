@@ -37,7 +37,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_route"
-            android:tint="@color/engineering_orange" />
+            app:tint="@color/engineering_orange" />
 
         <TextView
             android:layout_width="wrap_content"
