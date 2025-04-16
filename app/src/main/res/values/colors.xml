@@ -10,5 +10,8 @@
     <color name="cream">#EDDCC3</color>
     <color name="marron">#806350</color>
     <color name="b8a597">#B8A597</color>
+    <color name="alert_warning_background">#FFF3CD</color>
+    <color name="green">#2E7D32</color>
+
 
 </resources>

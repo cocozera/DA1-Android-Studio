@@ -73,7 +73,7 @@ public class CompletedRoutesAdapter extends BaseAdapter {
         String status = route.getStatus() != null ? route.getStatus().toUpperCase() : "";
         switch (status) {
             case "COMPLETED":
-                holder.textStatus.setTextColor(ContextCompat.getColor(context, R.color.engineering_orange));
+                holder.textStatus.setTextColor(ContextCompat.getColor(context, R.color.green));
                 break;
             case "PENDING":
                 holder.textStatus.setTextColor(ContextCompat.getColor(context, R.color.engineering_orange));

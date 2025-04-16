@@ -53,22 +53,22 @@
             android:layout_marginTop="2dp" />
 
         <TextView
-            android:id="@+id/textStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Estado: PENDING"
-            android:textSize="14sp"
-            android:textColor="@color/engineering_orange"
-            android:layout_marginTop="6dp"
-            android:textStyle="bold"/>
-
-        <TextView
             android:id="@+id/textClient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cliente: Nombre"
             android:textSize="13sp"
-            android:textColor="@color/khaki"
+            android:textColor="@color/coffee"
             android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: PENDING"
+            android:textSize="14sp"
+            android:layout_marginTop="6dp"
+            android:textStyle="bold"/>
+
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

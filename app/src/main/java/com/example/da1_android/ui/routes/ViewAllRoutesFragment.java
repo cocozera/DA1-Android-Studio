@@ -55,7 +55,7 @@ public class ViewAllRoutesFragment extends Fragment {
         listViewRoutes = view.findViewById(R.id.listViewRoutes);
         ImageButton buttonBack = view.findViewById(R.id.buttonBack);
 
-        // ✅ Agregamos animación como en historial
+
         buttonBack.setOnClickListener(v -> {
             ScaleAnimation scaleDown = new ScaleAnimation(
                     1f, 0.85f, 1f, 0.85f,
@@ -119,9 +119,12 @@ public class ViewAllRoutesFragment extends Fragment {
             public void onResponse(Call<RouteDetailDTO> call, Response<RouteDetailDTO> response) {
                 if (response.isSuccessful()) {
                     RouteDetailDTO detail = response.body();
-                    Intent intent = new Intent(requireContext(), RouteDetailActivity.class);
-                    intent.putExtra("routeDetail", detail);
-                    startActivity(intent);
+
+                    RouteDetailFragment detailFragment = RouteDetailFragment.newInstance(detail);
+                    requireActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, detailFragment)
+                            .addToBackStack(null)
+                            .commit();
                 } else {
                     Toast.makeText(requireContext(), "Error: " + response.message(), Toast.LENGTH_SHORT).show();
                 }

@@ -35,6 +35,7 @@ public class RouteHistoryFragment extends Fragment {
     private static final String TAG = "RouteHistoryFragment";
     private ListView listViewRoutes;
     private CompletedRoutesAdapter adapter;
+    private View noRoutesMessageContainer; // <- cambiamos el tipo a View
 
     @Inject
     RouteService routeService;
@@ -55,8 +56,8 @@ public class RouteHistoryFragment extends Fragment {
 
         ImageButton buttonBack = view.findViewById(R.id.buttonBack);
         listViewRoutes = view.findViewById(R.id.listViewRoutes);
+        noRoutesMessageContainer = view.findViewById(R.id.noRoutesMessageContainer); // <- usamos el container
 
-        // Animación simple sin usar archivos res/anim
         buttonBack.setOnClickListener(v -> {
             ScaleAnimation scaleDown = new ScaleAnimation(
                     1f, 0.85f, 1f, 0.85f,
@@ -103,6 +104,11 @@ public class RouteHistoryFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<CompletedRouteDTO> routes = response.body();
                     Log.d(TAG, "Número de rutas completadas recibidas: " + routes.size());
+                    if (routes.isEmpty()) {
+                        noRoutesMessageContainer.setVisibility(View.VISIBLE); // mostrar container completo
+                    } else {
+                        noRoutesMessageContainer.setVisibility(View.GONE);
+                    }
                     adapter.setRoutes(routes);
                 } else {
                     Log.e(TAG, "Respuesta no exitosa: " + response.message());
