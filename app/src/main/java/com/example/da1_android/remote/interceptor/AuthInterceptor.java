@@ -25,23 +25,41 @@ public class AuthInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
-        String token = userPrefsManager.getToken();
+        String url = originalRequest.url().encodedPath(); // obtener solo la ruta
 
-        Request requestWithToken = originalRequest.newBuilder()
-                .header("Authorization", "Bearer " + token)
-                .build();
+        // Verificamos si la ruta es pública
+        if (isPublicRoute(url)) {
+            return chain.proceed(originalRequest); // no agregamos token
+        }
+
+        String token = userPrefsManager.getToken();
+        Request requestWithToken;
+
+        if (token != null && !token.isEmpty()) {
+            requestWithToken = originalRequest.newBuilder()
+                    .header("Authorization", "Bearer " + token)
+                    .build();
+        } else {
+            requestWithToken = originalRequest;
+        }
 
         Response response = chain.proceed(requestWithToken);
 
         if (response.code() == 401) {
             userPrefsManager.clearAuthData();
-
-            // Redirigir al login
             Intent intent = new Intent(context, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(intent);
         }
 
         return response;
+    }
+
+    private boolean isPublicRoute(String path) {
+        return path.startsWith("/api/auth/login")
+                || path.startsWith("/api/auth/register")
+                || path.startsWith("/api/auth/verify")
+                || path.startsWith("/api/auth/recover-password")
+                || path.startsWith("/api/auth/change-password");
     }
 }
