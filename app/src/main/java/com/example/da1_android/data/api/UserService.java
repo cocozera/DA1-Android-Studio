@@ -9,5 +9,5 @@ import retrofit2.http.Query;
 public interface UserService {
 
     @GET("/api/users/me")
-    Call<UserDTO> getMe(@Query("userId") Long userId, @Header("Authorization") String token);
+    Call<UserDTO> getMe(@Query("userId") Long userId);
 }

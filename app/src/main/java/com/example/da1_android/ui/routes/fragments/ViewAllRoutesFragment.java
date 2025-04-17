@@ -1,6 +1,5 @@
-package com.example.da1_android.ui.routes;
+package com.example.da1_android.ui.routes.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +19,7 @@ import com.example.da1_android.data.api.RouteService;
 import com.example.da1_android.data.model.RouteDTO;
 import com.example.da1_android.data.model.RouteDetailDTO;
 import com.example.da1_android.data.prefs.UserPrefsManager;
+import com.example.da1_android.ui.routes.adapters.RouteAdapter;
 
 import java.util.List;
 
@@ -77,13 +77,8 @@ public class ViewAllRoutesFragment extends Fragment {
     }
 
     private void fetchRoutes() {
-        String token = userPrefsManager.getToken();
-        if (token == null || token.isEmpty()) {
-            Toast.makeText(requireContext(), "No se encontró el token. Inicie sesión nuevamente.", Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        routeService.getAllRoutes("Bearer " + token).enqueue(new Callback<List<RouteDTO>>() {
+        routeService.getAllRoutes().enqueue(new Callback<List<RouteDTO>>() {
             @Override
             public void onResponse(Call<List<RouteDTO>> call, Response<List<RouteDTO>> response) {
                 if (response.isSuccessful()) {
@@ -108,13 +103,8 @@ public class ViewAllRoutesFragment extends Fragment {
     }
 
     private void fetchRouteDetails(Long routeId) {
-        String token = userPrefsManager.getToken();
-        if (token == null || token.isEmpty()) {
-            Toast.makeText(requireContext(), "No se encontró el token. Inicie sesión nuevamente.", Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        routeService.getRouteDetails(routeId, "Bearer " + token).enqueue(new Callback<RouteDetailDTO>() {
+        routeService.getRouteDetails(routeId).enqueue(new Callback<RouteDetailDTO>() {
             @Override
             public void onResponse(Call<RouteDetailDTO> call, Response<RouteDetailDTO> response) {
                 if (response.isSuccessful()) {

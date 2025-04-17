@@ -1,4 +1,4 @@
-package com.example.da1_android.ui.routes;
+package com.example.da1_android.ui.routes.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +19,7 @@ import com.example.da1_android.data.api.RouteService;
 import com.example.da1_android.data.model.AuthResponse;
 import com.example.da1_android.data.model.CompletedRouteDTO;
 import com.example.da1_android.data.prefs.UserPrefsManager;
+import com.example.da1_android.ui.routes.adapters.CompletedRoutesAdapter;
 
 import java.util.List;
 
@@ -78,27 +79,11 @@ public class RouteHistoryFragment extends Fragment {
         adapter = new CompletedRoutesAdapter(requireContext());
         listViewRoutes.setAdapter(adapter);
 
-        String token = userPrefsManager.getToken();
         Long userId = userPrefsManager.getUserId();
 
-        Log.d(TAG, "Token obtenido: " + token);
         Log.d(TAG, "UserId obtenido: " + userId);
 
-        if (token == null || userId == null) {
-            Log.e(TAG, "No se encontró token o userId. Asegúrate de haber guardado la respuesta de autenticación.");
-
-            AuthResponse dummyAuth = new AuthResponse();
-            dummyAuth.setToken("dummy_token");
-            dummyAuth.setUserId(1L);
-            userPrefsManager.saveAuthResponse(dummyAuth);
-
-            token = userPrefsManager.getToken();
-            userId = userPrefsManager.getUserId();
-            Log.d(TAG, "Valores dummy guardados: Token = " + token + ", UserId = " + userId);
-            Toast.makeText(requireContext(), "Se han guardado valores de prueba", Toast.LENGTH_SHORT).show();
-        }
-
-        routeService.getCompletedRoutes(userId, "Bearer " + token).enqueue(new Callback<List<CompletedRouteDTO>>() {
+        routeService.getCompletedRoutes(userId).enqueue(new Callback<List<CompletedRouteDTO>>() {
             @Override
             public void onResponse(Call<List<CompletedRouteDTO>> call, Response<List<CompletedRouteDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {

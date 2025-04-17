@@ -1,4 +1,4 @@
-package com.example.da1_android.ui.routes;
+package com.example.da1_android.ui.routes.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

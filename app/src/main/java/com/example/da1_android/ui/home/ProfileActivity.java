@@ -51,11 +51,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Obtenemos el userId desde SharedPreferences
         Long userId = userPrefsManager.getUserId();
-        String jwt_token = "Bearer " + userPrefsManager.getToken();
-        Log.d(TAG, "onCreate: userId obtenido = " + userId);
-        if (userId != null & jwt_token != null) {
+        if (userId != null) {
             // Llamamos al endpoint /api/user/me pasando el userId
-            userService.getMe(userId, jwt_token).enqueue(new Callback<UserDTO>() {
+            userService.getMe(userId).enqueue(new Callback<UserDTO>() {
                 @Override
                 public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -110,7 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d(TAG, "logout: Token antes del logout = " + currentToken);
 
         // Limpia los datos del usuario de SharedPreferences
-        userPrefsManager.clearAuth();
+        userPrefsManager.clearAuthData();
 
         // Después del logout, logueamos el token que debería estar limpio (null)
         String tokenAfterLogout = userPrefsManager.getToken();

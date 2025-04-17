@@ -15,9 +15,10 @@ import com.example.da1_android.data.api.RouteService;
 import com.example.da1_android.data.model.AuthResponse;
 import com.example.da1_android.data.model.InProgressRouteDTO;
 import com.example.da1_android.data.prefs.UserPrefsManager;
-import com.example.da1_android.ui.routes.InProgressRouteFragment;
-import com.example.da1_android.ui.routes.RouteHistoryFragment;
-import com.example.da1_android.ui.routes.ViewAllRoutesFragment;
+import com.example.da1_android.ui.login.LoginActivity;
+import com.example.da1_android.ui.routes.fragments.InProgressRouteFragment;
+import com.example.da1_android.ui.routes.fragments.RouteHistoryFragment;
+import com.example.da1_android.ui.routes.fragments.ViewAllRoutesFragment;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -50,6 +51,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (userPrefsManager.getToken() == null) {
+            redirigirAlLogin();
+            return;
+        }
+
         setContentView(R.layout.activity_home);
 
         // Referencias UI
@@ -106,23 +113,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void verificarRutaEnProgreso() {
-        String token = userPrefsManager.getToken();
         Long userId = userPrefsManager.getUserId();
 
-        if (token == null || userId == null) {
-            Log.e(TAG, "No se encontró token o userId. Asignando dummy para testing.");
-
-            AuthResponse dummyAuth = new AuthResponse();
-            dummyAuth.setToken("dummy_token");
-            dummyAuth.setUserId(1L);
-            userPrefsManager.saveAuthResponse(dummyAuth);
-
-            token = userPrefsManager.getToken();
-            userId = userPrefsManager.getUserId();
-            Toast.makeText(this, "Se asignaron valores de prueba", Toast.LENGTH_SHORT).show();
-        }
-
-        routeService.getInProgressRoutes(userId, "Bearer " + token)
+        routeService.getInProgressRoutes(userId)
                 .enqueue(new Callback<List<InProgressRouteDTO>>() {
                     @Override
                     public void onResponse(Call<List<InProgressRouteDTO>> call, Response<List<InProgressRouteDTO>> response) {
@@ -157,5 +150,11 @@ public class HomeActivity extends AppCompatActivity {
         routeHistoryCard.setVisibility(View.VISIBLE);
         verificarRutaEnProgreso(); // <-- Volvemos a verificar al volver al Home
         fragmentContainer.setVisibility(View.GONE);
+    }
+
+    private void redirigirAlLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

@@ -21,7 +21,7 @@
             android:name=".ui.routes.RouteDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.routes.ViewAllRoutesFragment"
+            android:name=".ui.routes.fragments.ViewAllRoutesFragment"
             android:exported="false" />
         <activity
             android:name=".ui.routes.RouteHistoryActivity"

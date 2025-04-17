@@ -1,4 +1,4 @@
-package com.example.da1_android.ui.routes;
+package com.example.da1_android.ui.routes.fragments;
 
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;

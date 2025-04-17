@@ -38,7 +38,7 @@ public class UserPrefsManager {
     }
 
     // Método para limpiar la sesión: borra token y userId
-    public void clearAuth() {
+    public void clearAuthData() {
         encryptedSharedPreferences.edit()
                 .remove(KEY_TOKEN)
                 .remove(KEY_USER_ID)

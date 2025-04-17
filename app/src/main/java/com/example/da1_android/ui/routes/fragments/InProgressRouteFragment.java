@@ -1,4 +1,4 @@
-package com.example.da1_android.ui.routes;
+package com.example.da1_android.ui.routes.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -82,23 +82,9 @@ public class InProgressRouteFragment extends Fragment {
     }
 
     private void cargarRutaEnProgreso() {
-        String token = userPrefsManager.getToken();
         Long userId = userPrefsManager.getUserId();
 
-        if (token == null || userId == null) {
-            Log.e(TAG, "Token o userId no encontrados. Cargando dummy para test.");
-
-            AuthResponse dummy = new AuthResponse();
-            dummy.setToken("dummy_token");
-            dummy.setUserId(1L);
-            userPrefsManager.saveAuthResponse(dummy);
-
-            token = dummy.getToken();
-            userId = dummy.getUserId();
-            Toast.makeText(requireContext(), "Dummy cargado", Toast.LENGTH_SHORT).show();
-        }
-
-        routeService.getInProgressRoutes(userId, "Bearer " + token)
+        routeService.getInProgressRoutes(userId)
                 .enqueue(new Callback<List<InProgressRouteDTO>>() {
                     @Override
                     public void onResponse(Call<List<InProgressRouteDTO>> call, Response<List<InProgressRouteDTO>> response) {
