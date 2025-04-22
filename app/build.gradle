@@ -45,6 +45,7 @@ dependencies {
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation libs.constraintlayout
     annotationProcessor 'com.google.dagger:hilt-compiler:2.48'
 

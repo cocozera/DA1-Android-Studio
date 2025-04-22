@@ -6,14 +6,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.da1_android.R;
 import com.example.da1_android.data.api.RouteService;
-import com.example.da1_android.data.model.AuthResponse;
+import com.example.da1_android.data.api.UserService;
 import com.example.da1_android.data.model.InProgressRouteDTO;
+import com.example.da1_android.data.model.UserDTO;
 import com.example.da1_android.data.prefs.UserPrefsManager;
 import com.example.da1_android.ui.login.LoginActivity;
 import com.example.da1_android.ui.routes.fragments.InProgressRouteFragment;
@@ -39,19 +40,20 @@ public class HomeActivity extends AppCompatActivity {
     private ImageButton profileButton;
     private MaterialCardView availableRoutesCard, routeHistoryCard;
     private FloatingActionButton btnInProgress;
-    private View topBar, titleTextView;
+    private View topBar;
+    private TextView titleTextView;
     private FrameLayout fragmentContainer;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    @Inject
-    RouteService routeService;
-
-    @Inject
-    UserPrefsManager userPrefsManager;
+    @Inject RouteService routeService;
+    @Inject UserService userService;
+    @Inject UserPrefsManager userPrefsManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Si no hay token, redirige al login
         if (userPrefsManager.getToken() == null) {
             redirigirAlLogin();
             return;
@@ -59,7 +61,8 @@ public class HomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
 
-        // Referencias UI
+        // Vinculación de vistas
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
         profileButton = findViewById(R.id.profileButton);
         availableRoutesCard = findViewById(R.id.availableRoutesCard);
         routeHistoryCard = findViewById(R.id.routeHistoryCard);
@@ -68,14 +71,38 @@ public class HomeActivity extends AppCompatActivity {
         titleTextView = findViewById(R.id.titleTextView);
         fragmentContainer = findViewById(R.id.fragment_container);
 
+        // Configurar Swipe to Refresh solo en Home
+        swipeRefreshLayout.setOnRefreshListener(this::verificarRutaEnProgreso);
+        swipeRefreshLayout.setEnabled(true);
+
+        // Cargar nombre desde el endpoint y saludar
+        Long userId = userPrefsManager.getUserId();
+        if (userId != null) {
+            userService.getMe(userId).enqueue(new Callback<UserDTO>() {
+                @Override
+                public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        String nombre = response.body().getName();
+                        titleTextView.setText("¡Bienvenido, " + nombre + "!");
+                    } else {
+                        titleTextView.setText("¡Bienvenido!");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserDTO> call, Throwable t) {
+                    Log.e(TAG, "Error al obtener usuario: " + t.getMessage(), t);
+                    titleTextView.setText("¡Bienvenido!");
+                }
+            });
+        } else {
+            titleTextView.setText("¡Bienvenido!");
+        }
+
         fragmentContainer.setVisibility(View.GONE);
 
-        // Botón de perfil
-        profileButton.setOnClickListener(v -> {
-            startActivity(new Intent(this, ProfileActivity.class));
-        });
-
-        // Rutas disponibles
+        // Navegación
+        profileButton.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
         availableRoutesCard.setOnClickListener(v -> {
             ocultarHomeUI();
             getSupportFragmentManager().beginTransaction()
@@ -83,8 +110,6 @@ public class HomeActivity extends AppCompatActivity {
                     .addToBackStack(null)
                     .commit();
         });
-
-        // Historial de rutas
         routeHistoryCard.setOnClickListener(v -> {
             ocultarHomeUI();
             getSupportFragmentManager().beginTransaction()
@@ -92,8 +117,6 @@ public class HomeActivity extends AppCompatActivity {
                     .addToBackStack(null)
                     .commit();
         });
-
-        // Rutas en progreso
         btnInProgress.setOnClickListener(v -> {
             ocultarHomeUI();
             getSupportFragmentManager().beginTransaction()
@@ -102,19 +125,19 @@ public class HomeActivity extends AppCompatActivity {
                     .commit();
         });
 
-        // Volver al Home si no hay más fragments
+        // Listener para mostrar home al volver de fragments
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 mostrarHomeUI();
             }
         });
 
+        // Verificar rutas en progreso al inicio
         verificarRutaEnProgreso();
     }
 
     private void verificarRutaEnProgreso() {
         Long userId = userPrefsManager.getUserId();
-
         routeService.getInProgressRoutes(userId)
                 .enqueue(new Callback<List<InProgressRouteDTO>>() {
                     @Override
@@ -124,12 +147,14 @@ public class HomeActivity extends AppCompatActivity {
                         } else {
                             btnInProgress.setVisibility(View.GONE);
                         }
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onFailure(Call<List<InProgressRouteDTO>> call, Throwable t) {
                         Log.e(TAG, "Error al verificar ruta en progreso: " + t.getMessage(), t);
                         btnInProgress.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
@@ -141,6 +166,7 @@ public class HomeActivity extends AppCompatActivity {
         routeHistoryCard.setVisibility(View.GONE);
         btnInProgress.setVisibility(View.GONE);
         fragmentContainer.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setEnabled(false);  // Desactivar refresh en fragments
     }
 
     private void mostrarHomeUI() {
@@ -148,7 +174,8 @@ public class HomeActivity extends AppCompatActivity {
         titleTextView.setVisibility(View.VISIBLE);
         availableRoutesCard.setVisibility(View.VISIBLE);
         routeHistoryCard.setVisibility(View.VISIBLE);
-        verificarRutaEnProgreso(); // <-- Volvemos a verificar al volver al Home
+        swipeRefreshLayout.setEnabled(true);   // Reactivar refresh en home
+        verificarRutaEnProgreso();
         fragmentContainer.setVisibility(View.GONE);
     }
 
@@ -156,5 +183,6 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
+        finish();
+}
 }
